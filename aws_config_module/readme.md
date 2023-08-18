@@ -28,15 +28,21 @@ This Terraform module sets up AWS Config resources for monitoring and controllin
 ## Variables
 
 `bucket_name`: Name for the S3 bucket (globally unique).
+
 `sns_topic_name`: Name for the SNS topic (within your AWS account).
+
 `delivery_channel_name`: Name for the AWS Config delivery channel (within your AWS account).
+
 `config_rule_name`: Name for the AWS Config rule (within your AWS account).
 
 ## Outputs
 
 `bucket_name`: Name of the created S3 bucket.
+
 `sns_topic_name`: Name of the created SNS topic.
+
 `delivery_channel_name`: Name of the created AWS Config delivery channel.
+
 `config_rule_name`: Name of the created AWS Config rule.
 
 Feel free to modify the variable values according to your naming conventions and requirements.
