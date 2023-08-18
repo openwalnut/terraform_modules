@@ -1,6 +1,6 @@
 # AWS Config and Controls Terraform Module
 
-This Terraform module sets up AWS Config resources for monitoring and controlling your AWS environment. It creates an S3 bucket for storing configuration data, an SNS topic for receiving notifications, an AWS Config delivery channel, and an AWS Config rule.
+This Terraform module sets up AWS Config resources for monitoring and controlling your AWS environment. It creates an S3 bucket for storing configuration data, an SNS topic for receiving notifications, an AWS Config delivery channel, and an AWS Config rule. AWS Config rule in this module monitors if S3 buckets in your environment have versioning enabled.
 
 ## Usage
 
