@@ -204,13 +204,13 @@ data "aws_iam_policy_document" "cloudtrail_role_policy" {
   statement {
     effect    = "Allow"
     actions   = ["logs:CreateLogStream"]
-    resources = ["arn:aws:logs:*:*:log-group:Cloudtrail/ManagementEvents:log-stream:*"]
+    resources = ["arn:aws:logs:*:*:log-group:${var.cloudwatch_log_group_name}:log-stream:*"]
   }
 
   statement {
     effect    = "Allow"
     actions   = ["logs:PutLogEvents"]
-    resources = ["arn:aws:logs:*:*:log-group:Cloudtrail/ManagementEvents:log-stream:*"]
+    resources = ["arn:aws:logs:*:*:log-group:${var.cloudwatch_log_group_name}:log-stream:*"]
   }
 
 }

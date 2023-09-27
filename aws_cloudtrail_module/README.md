@@ -31,7 +31,6 @@ This Terraform module creates and configures the necessary resources for creatin
 
 ## Input Variables
 
-- `kms_key_description` (string): Description for the KMS key.
 - `s3_bucket_name` (string): Name of the S3 bucket where CloudTrail logs will be securely stored.
 - `cloudtrail_trail_name` (string): Name your CloudTrail trail.
 - `cloudtrail_role_name` (string): Define a name for the IAM role that CloudTrail will use.
@@ -43,7 +42,6 @@ Feel free to modify the variable values according to your naming conventions and
 
 Retrieve useful information about your resources:
 
-- `kms_key_arn` (string): The ARN of the created KMS key.
 - `s3_bucket_arn` (string): The ARN of the created S3 bucket.
 - `cloudtrail_role_arn` (string): The ARN of the IAM role for CloudTrail.
 - `cloudwatch_log_group_arn` (string): The ARN of the CloudWatch Log Group for CloudTrail logs.
