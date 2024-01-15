@@ -86,26 +86,51 @@ resource "aws_kms_key" "guardduty_key" {
   policy                  = data.aws_iam_policy_document.guardduty_kms.json
 }
 
+# aws_guardduty_detector_feature is used to Enable/Disable features of the GuardDuty.
 resource "aws_guardduty_detector" "ow_guardduty" {
   enable = true
+}
 
-  datasources {
-    s3_logs {
-      enable = false
-    }
-    malware_protection {
-      scan_ec2_instance_with_findings {
-        ebs_volumes {
-          enable = false
-        }
-      }
-    }
-    kubernetes {
-      audit_logs {
-        enable = false
-      }
-    }
+# GuardDuty EKS Runtime Monitoring is managed as part of the new "Runtime Monitoring" feature.
+resource "aws_guardduty_detector_feature" "ow_runtime_monitoring" {
+  detector_id = aws_guardduty_detector.ow_guardduty.id
+  name        = "RUNTIME_MONITORING"
+  status      = "ENABLED"
+
+  additional_configuration {
+    name   = "EKS_ADDON_MANAGEMENT"
+    status = "ENABLED"
+  }  
+
+  additional_configuration {
+    name   = "ECS_FARGATE_AGENT_MANAGEMENT"
+    status = "ENABLED"
   }
+
+}
+
+resource "aws_guardduty_detector_feature" "lambda_network_logs_monitoring" {
+  detector_id = aws_guardduty_detector.ow_guardduty.id
+  name        = "LAMBDA_NETWORK_LOGS"
+  status      = "DISABLED" # change it to ENABLED if you need it.
+}
+
+resource "aws_guardduty_detector_feature" "ebs_malware_protection_monitoring" {
+  detector_id = aws_guardduty_detector.ow_guardduty.id
+  name        = "EBS_MALWARE_PROTECTION"
+  status      = "DISABLED" # change it to ENABLED if you need it.
+}
+
+resource "aws_guardduty_detector_feature" "rds_login_events_monitoring" {
+  detector_id = aws_guardduty_detector.ow_guardduty.id
+  name        = "RDS_LOGIN_EVENTS"
+  status      = "DISABLED" # change it to ENABLED if you need it.
+}
+
+resource "aws_guardduty_detector_feature" "s3_data_events_monitoring" {
+  detector_id = aws_guardduty_detector.ow_guardduty.id
+  name        = "S3_DATA_EVENTS"
+  status      = "DISABLED" # change it to ENABLED if you need it.
 }
 
 resource "aws_guardduty_publishing_destination" "findings_bucket" {
